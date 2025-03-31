@@ -13,7 +13,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 from django.utils.translation import gettext_lazy as _
-from variebles import my_varb
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = my_varb.SECRET_KEY
+SECRET_KEY = "secret"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -159,16 +162,16 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 CART_SESSION_ID = 'cart'
 
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = my_varb.EMAIL_HOST_USER
-EMAIL_HOST_PASSWORD = my_varb.EMAIL_HOST_PASSWORD
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+EMAIL_HOST = os.environ['SMTP_HOST']
+EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
+EMAIL_PORT = os.environ['EMAIL_PORT']
+EMAIL_USE_TLS = os.environ['EMAIL_USE_TLS']
 
-STRIPE_PUBLISHABLE_KEY = my_varb.STRIPE_PUBLISHABLE_KEY
-STRIPE_SECRET_KEY = my_varb.STRIPE_SECRET_KEY
-STRIPE_API_VERSION = '2022-11-15'
-STRIPE_WEBHOOK_SECRET = my_varb.STRIPE_WEBHOOK_SECRET
+STRIPE_PUBLISHABLE_KEY = os.environ['STRIPE_PUBLISHABLE_KEY']
+STRIPE_SECRET_KEY = os.environ['STRIPE_SECRET_KEY']
+STRIPE_API_VERSION = os.environ['STRIPE_API_VERSION']
+STRIPE_WEBHOOK_SECRET = os.environ['STRIPE_WEBHOOK_SECRET']
 
 REDIS_HOST = 'localhost'
 REDIS_PORT = 6379
